@@ -1,0 +1,118 @@
+
+<style>
+  :root {
+    --space: 8px;
+    --brown: 166, 146, 129;
+    --black: 88, 88, 88;
+    --white: 255, 255, 255;
+  }
+  body {
+    margin: 0;
+  }
+  .layer {
+    margin: 0px;
+    width: calc(60px * 14 + var(--space) * 2);
+    position: relative;
+  }
+  .name {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    font-size: 1.75rem;
+    line-height: 2;
+    color: rgba(var(--black), 0.6);
+  }
+  .keymap {
+    background-color: rgb(240, 238, 235);
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 10px; */
+    font-family: Monoid;
+    font-size: 12px;
+    /* border-radius: 4px; */
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .key {
+    width: 56px;
+    height: 22px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin: 2px;
+  }
+  .key:not(.none) {
+    background-color: rgb(var(--white));
+    box-shadow: 0 0.5px 3px rgba(var(--white), 1);
+    color: var(--black);
+  }
+  .key:nth-child(1),.key:nth-child(14),.key:nth-child(18),.key:nth-child(25),.key:nth-child(31),.key:nth-child(33),.key:nth-child(38),.key:nth-child(40),.key:nth-child(43),.key:nth-child(49),.key:nth-child(50),.key:nth-child(56),.key:nth-child(60),.key:nth-child(63),.key:nth-child(64),.key:nth-child(67) {
+    background-color: rgb(var(--black));
+    box-shadow: 0 0.5px 3px rgba(var(--black), 0.5);
+    color: rgb(var(--white));
+  }
+</style>
+
+
+      <div class="layer">
+        <div class="name">
+          0
+        </div>
+        <div class="keymap">
+          
+          <div class="key">ESC</div><div class="key">CTL_W</div><div class="key">PRV_TAB</div><div class="key">NXT_TAB</div><div class="key">CTL_T_</div><div class="key">CTL_F</div><div class="key none"></div><div class="key none"></div><div class="key">AT</div><div class="key">EXLM</div><div class="key">COLN</div><div class="key">QUOT</div><div class="key">HASH</div><div class="key">DEL</div>
+        
+          <div class="key">TAB</div><div class="key">V</div><div class="key">J</div><div class="key">E</div><div class="key">X</div><div class="key">LPRN</div><div class="key none"></div><div class="key none"></div><div class="key">SLSH</div><div class="key">D</div><div class="key">K</div><div class="key">B</div><div class="key">C</div><div class="key">BSPC</div>
+        
+          <div class="key">LCTL</div><div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">A</div><div class="key">P</div><div class="key none"></div><div class="key none"></div><div class="key">S</div><div class="key">N</div><div class="key">T</div><div class="key">R</div><div class="key">Y</div><div class="key">ENT</div>
+        
+          <div class="key">OSL_L2</div><div class="key">F</div><div class="key">W</div><div class="key">Z</div><div class="key">Q</div><div class="key">LBRC</div><div class="key">CTL_S</div><div class="key">NXT_TAB</div><div class="key">MINS</div><div class="key">M</div><div class="key">G</div><div class="key">H</div><div class="key">L</div><div class="key">PSCR</div>
+        
+          <div class="key">LAYER1</div><div class="key">LGUI</div><div class="key">CTL_A</div><div class="key">LALT</div><div class="key">COMM</div><div class="key">SFT_SP</div><div class="key">LAYER2</div><div class="key">ZHTG</div><div class="key">SFT_SP</div><div class="key">DOT</div><div class="key">RALT</div><div class="key"></div><div class="key">APP</div><div class="key">LAYER1</div>
+        
+        </div>
+      </div>
+    
+      <div class="layer">
+        <div class="name">
+          1
+        </div>
+        <div class="keymap">
+          
+          <div class="key">TRNS</div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key none"></div><div class="key none"></div><div class="key">PERC</div><div class="key">CIRC</div><div class="key">SCLN</div><div class="key">DQT</div><div class="key">GRV</div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key"></div><div class="key"></div><div class="key">PGUP</div><div class="key"></div><div class="key">RPRN</div><div class="key none"></div><div class="key none"></div><div class="key">QUES</div><div class="key">PLUS</div><div class="key">UP</div><div class="key">ASTR</div><div class="key">DLR</div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key"></div><div class="key">HOME</div><div class="key">PGDN</div><div class="key">END</div><div class="key"></div><div class="key none"></div><div class="key none"></div><div class="key">AMPR</div><div class="key">LEFT</div><div class="key">DOWN</div><div class="key">RGHT</div><div class="key">BSLS</div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key">CTL_Z</div><div class="key">CTL_X</div><div class="key">CTL_C</div><div class="key">CTL_V</div><div class="key">RBRC</div><div class="key">AG_NORM</div><div class="key">AG_SWAP</div><div class="key">EQL</div><div class="key">UNDS</div><div class="key"></div><div class="key">TILD</div><div class="key">PIPE</div><div class="key">INS</div>
+        
+          <div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key"></div><div class="key"></div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div>
+        
+        </div>
+      </div>
+    
+      <div class="layer">
+        <div class="name">
+          2
+        </div>
+        <div class="keymap">
+          
+          <div class="key">TRNS</div><div class="key">P1</div><div class="key">P2</div><div class="key">P3</div><div class="key">P4</div><div class="key">P5</div><div class="key none"></div><div class="key none"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key">F1</div><div class="key">F2</div><div class="key">F3</div><div class="key">F4</div><div class="key">P6</div><div class="key none"></div><div class="key none"></div><div class="key"></div><div class="key">P1</div><div class="key">P2</div><div class="key">P3</div><div class="key"></div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key">F5</div><div class="key">F6</div><div class="key">F7</div><div class="key">F8</div><div class="key">P7</div><div class="key none"></div><div class="key none"></div><div class="key"></div><div class="key">P4</div><div class="key">P5</div><div class="key">P6</div><div class="key"></div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key">F9</div><div class="key">F10</div><div class="key">F11</div><div class="key">F12</div><div class="key">P8</div><div class="key">P0</div><div class="key"></div><div class="key"></div><div class="key">P7</div><div class="key">P8</div><div class="key">P9</div><div class="key"></div><div class="key">TRNS</div>
+        
+          <div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">P9</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">P0</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div><div class="key">TRNS</div>
+        
+        </div>
+      </div>
+    

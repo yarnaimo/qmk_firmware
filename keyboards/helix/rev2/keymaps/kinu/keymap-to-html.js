@@ -1,7 +1,7 @@
 const fs = require('fs')
 const str = fs.readFileSync(__dirname + '/keymap.c', 'utf8')
 
-const matches = str.match(/\[.+LAYOUT\( \\[\s\S]+?\)/g)
+const matches = str.match(/^\s*\[.+LAYOUT\( \\[\s\S]+?\)/mg)
 
 const mapsString = matches
   .map((m, i) => {
@@ -93,7 +93,7 @@ const html = `
   .key {
     width: 56px;
     height: 22px;
-    border-radius: 2px;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +105,7 @@ const html = `
     box-shadow: 0 0.5px 3px rgba(var(--white), 1);
     color: var(--black);
   }
-  ${[1, 14, 17, 18, 25, 26, 33, 38, 43, 49, 50, 56, 60, 63, 64, 67]
+  ${[1, 14, 18, 25, 31, 33, 38, 40, 43, 49, 50, 56, 60, 63, 64, 67]
     .map(n => `.key:nth-child(${n})`)
     .join()} {
     background-color: rgb(var(--black));
