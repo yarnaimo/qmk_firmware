@@ -56,6 +56,10 @@ enum macro_keycodes {
 
 #define ZHTG_L2 LT(_LAYER2, JP_ZHTG)
 #define KANA_L2 LT(_LAYER2, JP_KANA)
+#define SPC_L1 LT(_LAYER1, KC_SPC)
+#define ZHTG_L1 LT(_LAYER1, JP_ZHTG)
+
+#define OSM_SFT MT(MOD_LSFT, OSM(MOD_LSFT))
 
 #define OSL_L2 OSL(_LAYER2)
 
@@ -64,6 +68,8 @@ enum macro_keycodes {
 
 #define PRV_TAB LCTL(LSFT(KC_TAB))
 #define NXT_TAB LCTL(KC_TAB)
+#define PREV LALT(KC_LEFT)
+#define NEXT LALT(KC_RGHT)
 
 #define CTL_A LCTL(KC_A)
 #define CTL_Z LCTL(KC_Z)
@@ -77,16 +83,16 @@ enum macro_keycodes {
 
 // pnl nlp
 // RN RK RS RT RM RG DR FR TS REI SK MK CK
-// OI OE OU OA AI AU EA EU EI GHT MB CL BY
+// OI OE OU OA AI AU EA EU EI GHT MB CL BY LD RD RL shadow
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_KINU] = LAYOUT( \
-      KC_ESC , CTL_W  , PRV_TAB, NXT_TAB, CTL_T_ , CTL_F  ,                   JP_AT  , JP_EXLM, JP_COLN, JP_QUOT, JP_HASH, KC_DEL , \
-      KC_TAB , KC_V   , KC_J   , KC_E   , KC_X   , JP_LPRN,                   JP_SLSH, KC_D   , KC_K   , KC_B   , KC_C   , KC_BSPC, \
-      KC_LCTL, KC_U   , KC_I   , KC_O   , KC_A   , KC_P   ,                   KC_S   , KC_N   , KC_T   , KC_R   , KC_Y   , KC_ENT , \
-      OSL_L2 , KC_F   , KC_W   , KC_Z   , KC_Q   , JP_LBRC, CTL_S  , NXT_TAB, JP_MINS, KC_M   , KC_G   , KC_H   , KC_L   , KC_PSCR, \
-      LAYER1 , KC_LGUI, CTL_A  , KC_LALT, JP_COMM, SFT_SP , LAYER2 , JP_ZHTG, SFT_SP , JP_DOT , KC_RALT, XXXXXXX, KC_APP , LAYER1   \
+      KC_ESC , CTL_X  , CTL_C  , CTL_V  , CTL_F  , KC_MUTE,                   JP_AT  , JP_CIRC, JP_COLN, JP_QUOT, JP_HASH, KC_DEL , \
+      KC_TAB , KC_Q   , KC_F   , KC_E   , KC_Z   , JP_LPRN,                   JP_SLSH, KC_L   , KC_K   , KC_B   , KC_W   , KC_BSPC, \
+      KC_LALT, KC_A   , KC_U   , KC_O   , KC_I   , KC_P   ,                   KC_N   , KC_S   , KC_T   , KC_R   , KC_Y   , KC_ENT , \
+      JP_LBRC, KC_V   , JP_DOT , KC_J   , KC_D   , KC_X   , CTL_Z  , KC_PSCR, KC_H   , KC_M   , KC_G   , JP_COMM, KC_C   , JP_MINS, \
+      KC_LCTL, KC_LGUI, CTL_S  , KC_LCTL, SPC_L1 , LAYER2 , OSM_SFT, ZHTG_L1, KC_SPC , LAYER2 , KC_RALT, XXXXXXX, KC_APP , KC_RCTL  \
       ),
 
   // [_KINU] = LAYOUT( 
@@ -98,19 +104,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //     ),
 
   [_LAYER1] =  LAYOUT( \
-      KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   JP_PERC, JP_CIRC, JP_SCLN, JP_DQT , JP_GRV , KC_TRNS, \
-      KC_TRNS, XXXXXXX, XXXXXXX, KC_PGUP, XXXXXXX, JP_RPRN,                   JP_QUES, JP_PLUS, KC_UP  , JP_ASTR, JP_DLR , KC_TRNS, \
-      KC_TRNS, XXXXXXX, KC_HOME, KC_PGDN, KC_END , XXXXXXX,                   JP_AMPR, KC_LEFT, KC_DOWN, KC_RGHT, JP_BSLS, KC_TRNS, \
-      KC_TRNS, CTL_Z  , CTL_X  , CTL_C  , CTL_V  , JP_RBRC, AG_NORM, AG_SWAP, JP_EQL , JP_UNDS, XXXXXXX, JP_TILD, JP_PIPE, KC_INS , \
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, XXXXXXX, XXXXXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS  \
+      KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  ,                   XXXXXXX, XXXXXXX, JP_SCLN, JP_DQT , XXXXXXX, _______, \
+      KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 ,                   JP_PERC, JP_PLUS, KC_UP  , JP_EXLM, JP_DLR , _______, \
+      KC_P1  , KC_P2  , KC_P3  , KC_P4  , KC_P5  , KC_P6  ,                   JP_AMPR, KC_LEFT, KC_DOWN, KC_RGHT, JP_BSLS, _______, \
+      KC_P7  , KC_P8  , KC_P9  , KC_P0  , XXXXXXX, XXXXXXX, XXXXXXX, KC_INS , XXXXXXX, JP_UNDS, XXXXXXX, JP_PIPE, XXXXXXX, _______, \
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
       ),
 
   [_LAYER2] =  LAYOUT( \
-      KC_TRNS, KC_P1  , KC_P2  , KC_P3  , KC_P4  , KC_P5  ,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TRNS, \
-      KC_TRNS, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_P6  ,                   XXXXXXX, KC_P1  , KC_P2  , KC_P3  , XXXXXXX, KC_TRNS, \
-      KC_TRNS, KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_P7  ,                   XXXXXXX, KC_P4  , KC_P5  , KC_P6  , XXXXXXX, KC_TRNS, \
-      KC_TRNS, KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_P8  , KC_P0  , XXXXXXX, XXXXXXX, KC_P7  , KC_P8  , KC_P9  , XXXXXXX, KC_TRNS, \
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_P9  , KC_TRNS, KC_TRNS, KC_TRNS, KC_P0  , KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS  \
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PAUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+      _______, XXXXXXX, CTL_W  , KC_PGUP, CTL_T_ , JP_RPRN,                   XXXXXXX, KC_P1  , KC_P2  , KC_P3  , XXXXXXX, _______, \
+      _______, PRV_TAB, KC_HOME, KC_PGDN, KC_END , NXT_TAB,                   XXXXXXX, KC_P4  , KC_P5  , KC_P6  , XXXXXXX, _______, \
+      JP_RBRC, XXXXXXX, PREV   , XXXXXXX, NEXT   , XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX, KC_P7  , KC_P8  , KC_P9  , XXXXXXX, _______, \
+      _______, _______, _______, _______, _______, _______, _______, JP_HENK, _______, KC_P0  , KC_P0  , _______, _______, _______  \
       )
 };
 
