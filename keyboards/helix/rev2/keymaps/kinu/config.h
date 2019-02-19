@@ -24,11 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // place overrides here
 
 #undef  TAPPING_TERM
-#define TAPPING_TERM 0
+#define TAPPING_TERM 120
 
-#define RETRO_TAPPING
+#define ONESHOT_TIMEOUT 5000
 
-// #define PERMISSIVE_HOLD
+// #define RETRO_TAPPING
+
+#define PERMISSIVE_HOLD
 
 // If you need more program area, try select and reduce rgblight modes to use.
 
