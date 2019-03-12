@@ -54,14 +54,26 @@ enum macro_keycodes {
 
 #define SFT_SP SFT_T(KC_SPC)
 
-#define ZHTG_L2 LT(_LAYER2, JP_ZHTG)
-#define KANA_L2 LT(_LAYER2, JP_KANA)
-#define SPC_L1 LT(_LAYER1, KC_SPC)
-#define ZHTG_L1 LT(_LAYER1, JP_ZHTG)
+#define OSL_L1 OSL(_LAYER1)
+#define OSM_SFT OSM(MOD_LSFT)
+#define OMT_SFT MT(MOD_LSFT, OSM_SFT)
 
-#define OSM_SFT MT(MOD_LSFT, OSM(MOD_LSFT))
+#define L1_SPC LT(_LAYER1, KC_SPC)
+#define L1_ZHTG LT(_LAYER1, JP_ZHTG)
+#define L1_KANA LT(_LAYER1, JP_KANA)
+#define L1_SFT LT(_LAYER1, OSM_SFT)
+#define L2_SPC LT(_LAYER2, KC_SPC)
+#define L2_ZHTG LT(_LAYER2, JP_ZHTG)
+#define L2_KANA LT(_LAYER2, JP_KANA)
+#define L2_SFT LT(_LAYER2, OSM_SFT)
 
 #define OSL_L2 OSL(_LAYER2)
+
+#define CTL_SPC CTL_T(KC_SPC)
+#define CTL_L1 CTL_T(_LAYER1)
+
+#define CT_ZHTG CTL_T(JP_ZHTG)
+#define CT_KANA CTL_T(JP_KANA)
 
 #define ALT_ZH ALT_T(JP_ZHTG)
 #define ALT_KA ALT_T(JP_KANA)
@@ -89,10 +101,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_KINU] = LAYOUT( \
       KC_ESC , CTL_X  , CTL_C  , CTL_V  , CTL_F  , KC_MUTE,                   JP_AT  , JP_CIRC, JP_COLN, JP_QUOT, JP_HASH, KC_DEL , \
-      KC_TAB , KC_Q   , KC_F   , KC_E   , KC_Z   , JP_LPRN,                   JP_SLSH, KC_L   , KC_K   , KC_B   , KC_W   , KC_BSPC, \
+      KC_TAB , JP_MINS, KC_C   , KC_E   , KC_Z   , JP_LPRN,                   JP_RPRN, KC_L   , KC_K   , KC_B   , JP_EQL , KC_BSPC, \
       KC_LALT, KC_A   , KC_U   , KC_O   , KC_I   , KC_P   ,                   KC_N   , KC_S   , KC_T   , KC_R   , KC_Y   , KC_ENT , \
-      JP_LBRC, KC_V   , JP_DOT , KC_J   , KC_D   , KC_X   , CTL_Z  , KC_PSCR, KC_H   , KC_M   , KC_G   , JP_COMM, KC_C   , JP_MINS, \
-      KC_LCTL, KC_LGUI, CTL_S  , KC_LCTL, SPC_L1 , LAYER2 , OSM_SFT, ZHTG_L1, KC_SPC , LAYER2 , KC_RALT, XXXXXXX, KC_APP , KC_RCTL  \
+      JP_SLSH, JP_COMM, KC_V   , KC_J   , KC_D   , KC_F   , JP_LBRC, JP_RBRC, KC_H   , KC_M   , KC_G   , KC_W   , JP_DOT , OSM_SFT, \
+      KC_PSCR, KC_LGUI, JP_UNDS, LAYER1 , OSM_SFT, L2_SPC , CT_ZHTG, CT_KANA, OSL_L1 , KC_SPC , KC_RALT, KC_Q   , KC_X   , KC_RCTL  \
       ),
 
   // [_KINU] = LAYOUT( 
@@ -104,19 +116,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //     ),
 
   [_LAYER1] =  LAYOUT( \
-      KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  ,                   XXXXXXX, XXXXXXX, JP_SCLN, JP_DQT , XXXXXXX, _______, \
-      KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 ,                   JP_PERC, JP_PLUS, KC_UP  , JP_EXLM, JP_DLR , _______, \
-      KC_P1  , KC_P2  , KC_P3  , KC_P4  , KC_P5  , KC_P6  ,                   JP_AMPR, KC_LEFT, KC_DOWN, KC_RGHT, JP_BSLS, _______, \
-      KC_P7  , KC_P8  , KC_P9  , KC_P0  , XXXXXXX, XXXXXXX, XXXXXXX, KC_INS , XXXXXXX, JP_UNDS, XXXXXXX, JP_PIPE, XXXXXXX, _______, \
+      KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  ,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+      KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 ,                   XXXXXXX, JP_DLR , KC_UP  , JP_BSLS, XXXXXXX, _______, \
+      KC_P1  , KC_P2  , KC_P3  , KC_P4  , KC_P5  , KC_P6  ,                   JP_PERC, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, _______, \
+      KC_P7  , KC_P8  , KC_P9  , KC_P0  , XXXXXXX, XXXXXXX, KC_APP , KC_INS , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, JP_SCLN, _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
       ),
 
   [_LAYER2] =  LAYOUT( \
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PAUS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-      _______, XXXXXXX, CTL_W  , KC_PGUP, CTL_T_ , JP_RPRN,                   XXXXXXX, KC_P1  , KC_P2  , KC_P3  , XXXXXXX, _______, \
-      _______, PRV_TAB, KC_HOME, KC_PGDN, KC_END , NXT_TAB,                   XXXXXXX, KC_P4  , KC_P5  , KC_P6  , XXXXXXX, _______, \
-      JP_RBRC, XXXXXXX, PREV   , XXXXXXX, NEXT   , XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX, KC_P7  , KC_P8  , KC_P9  , XXXXXXX, _______, \
-      _______, _______, _______, _______, _______, _______, _______, JP_HENK, _______, KC_P0  , KC_P0  , _______, _______, _______  \
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PAUS, JP_DQT , JP_ASTR, JP_EXLM, XXXXXXX, _______, \
+      _______, XXXXXXX, CTL_W  , KC_PGUP, CTL_T_ , XXXXXXX,                   JP_PIPE, KC_P1  , KC_P2  , KC_P3  , XXXXXXX, _______, \
+      _______, PRV_TAB, KC_HOME, KC_PGDN, KC_END , NXT_TAB,                   JP_PLUS, KC_P4  , KC_P5  , KC_P6  , XXXXXXX, _______, \
+      _______, XXXXXXX, PREV   , XXXXXXX, NEXT   , XXXXXXX, AG_NORM, AG_SWAP, JP_AMPR, KC_P7  , KC_P8  , KC_P9  , JP_COLN, _______, \
+      _______, _______, _______, _______, _______, _______, _______, JP_HENK, _______, KC_P0  , KC_P0  , JP_DOT , _______, _______  \
       )
 };
 

@@ -26,9 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef  TAPPING_TERM
 #define TAPPING_TERM 120
 
-#define ONESHOT_TIMEOUT 5000
+#define ONESHOT_TIMEOUT 1000
+#define ONESHOT_TAP_TOGGLE 2
 
 // #define RETRO_TAPPING
+// #define IGNORE_MOD_TAP_INTERRUPT
 
 #define PERMISSIVE_HOLD
 
