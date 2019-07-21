@@ -11,6 +11,7 @@
   #include "ssd1306.h"
 #endif
 #include "keymap_jp.h"
+#include <sendstring_jis.h>
 
 extern keymap_config_t keymap_config;
 
@@ -40,7 +41,23 @@ enum custom_keycodes {
   FUNC,
   ADJUST,
   EISU,
-  KANA
+  KANA,
+  KC_C_CV,
+  KC_AN,
+  KC_IN,
+  KC_UN,
+  KC_EN,
+  KC_ON,
+  KC_ATT,
+  KC_ITT,
+  KC_UTT,
+  KC_ETT,
+  KC_OTT,
+  KC_AH,
+  KC_IH,
+  KC_UH,
+  KC_EH,
+  KC_OH,
 };
 
 
@@ -106,15 +123,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
-     ESC ,SLSH,MINS,JLPR,JCOL,C_Z ,            CS_Z,SCLN,JAT ,JEQL,JBSL,DEL ,
+     ESC ,SLSH,COMM,JLPR,JRPR,C_CV,            C_Z ,SCLN,JCOL,DOT ,JBSL,DEL ,
   //|----*----*----+----+----+----|           |----+----+----+----*----*----|
-      Q  , C  , E  , Z  , P  ,TAB ,            ENT , H  , L  , K  , B  , V  ,
+      Q  ,MINS,JEQL, C  , X  ,TAB ,            ENT , F  , Z  , K  , B  , P  ,
   //|----*----*----******----+----|           |----+----******----*----*----|
-      A  , U  , O  , I  , F  ,PGUP,            UP  , N  , S  , T  , R  , Y  ,
+      A  , O  , E  , I  , U  ,PGUP,            UP  , N  , T  , S  , R  , D  ,
   //|----+----+----******----+----+----. ,----+----+----******----+----+----|
-      X  ,COMM, J  , D  ,HOME,C_PD,END ,  LEFT,C_DN,RGHT, M  , G  ,DOT , W  ,
+      V  , L  , J  , Y  ,HOME,C_PD,END ,  LEFT,C_DN,RGHT, M  , G  , H  , W  ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
-      1  ,G_2 , 3  , 4  ,A_5 ,S_SP,L_ZH,  R_KN,S_BS,A_6 , 7  , 8  , 9  , 0  \
+      1  ,G_2 , 3  , 4  ,A_5 ,S_SP,JZHT,  JKAN,BSPC,A_6 , 7  , 8  , 9  , 0  \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
   ),
 
@@ -126,23 +143,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
      F9  ,F10 ,F11 ,F12 ,JLBR,JRBR,                ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
-     C_C ,C_X ,    ,C_V ,JPIP,JTIL,JRPR, RESET,    ,    ,    ,    ,    ,    ,
+         ,JPIP,C_C ,C_X ,C_V ,    ,JAT , RESET,    ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
-     INS ,    ,    ,    ,    ,    , NO ,  MAC ,    ,    ,    ,    ,    ,    \
+     MUTE,    ,    ,    ,    ,    ,NO  ,  MAC ,    ,    ,    ,    ,    ,    \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
   ),
 
   [_RAISE] = LAYOUT_kc(
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
-         ,    ,    ,    ,    ,    ,            MUTE,NLCK,PSLS,PAST,PMNS,    ,
+         ,    ,    ,    ,    ,    ,            INS ,NLCK,PSLS,PAST,PMNS,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,                , P7 , P8 , P9 ,PPLS,    ,
+     AN  ,ON  ,EN  ,IN  ,UN  ,    ,            JGRV,P7  ,P8  ,P9  ,PPLS,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,                , P4 , P5 , P6 ,PPLS,    ,
+     ATT ,OTT ,ETT ,ITT ,UTT ,    ,            JTIL,P4  ,P5  ,P6  ,PPLS,    ,
   //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,    ,  PAUS, P0 , P1 , P2 , P3 ,PENT,    ,
+     AH  ,OH  ,EH  ,IH  ,UH  ,    ,    ,  PAUS,P0  ,P1  ,P2  ,P3  ,PENT,    ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,WIN ,   NO ,    , P0 ,    ,PDOT,PENT,    \
+         ,    ,    ,    ,    ,    ,WIN ,  NO  ,    ,P0  ,    ,PDOT,PENT,    \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
   )
 };
@@ -180,7 +197,61 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t mem_keycode;
+  uint16_t prev_keycode = mem_keycode;
+  bool is_tapped = ((!record->event.pressed) && (keycode == prev_keycode));
+  mem_keycode = keycode;
+
   switch (keycode) {
+    case KC_AN: if (record->event.pressed) { SEND_STRING("ann"); } break;
+    case KC_IN: if (record->event.pressed) { SEND_STRING("inn"); } break;
+    case KC_UN: if (record->event.pressed) { SEND_STRING("unn"); } break;
+    case KC_EN: if (record->event.pressed) { SEND_STRING("enn"); } break;
+    case KC_ON: if (record->event.pressed) { SEND_STRING("onn"); } break;
+
+    case KC_ATT: if (record->event.pressed) { SEND_STRING("altu"); } break;
+    case KC_ITT: if (record->event.pressed) { SEND_STRING("iltu"); } break;
+    case KC_UTT: if (record->event.pressed) { SEND_STRING("ultu"); } break;
+    case KC_ETT: if (record->event.pressed) { SEND_STRING("eltu"); } break;
+    case KC_OTT: if (record->event.pressed) { SEND_STRING("oltu"); } break;
+
+    case KC_AH: if (record->event.pressed) { SEND_STRING("a`"); } break;
+    case KC_IH: if (record->event.pressed) { SEND_STRING("i`"); } break;
+    case KC_UH: if (record->event.pressed) { SEND_STRING("u`"); } break;
+    case KC_EH: if (record->event.pressed) { SEND_STRING("e`"); } break;
+    case KC_OH: if (record->event.pressed) { SEND_STRING("o`"); } break;
+
+    case KC_C_CV:
+      if (record->event.pressed) {
+        tap_code16(KC_C_C);
+      } else {
+        tap_code16(KC_C_V);
+      }
+      break;
+
+    case KC_JZHT:
+      if (record->event.pressed) {
+        layer_on(_LOWER);
+      } else {
+        layer_off(_LOWER);
+        if (is_tapped) {
+          tap_code(keycode);
+        }
+      }
+      return false;
+      break;
+    case KC_JKAN:
+      if (record->event.pressed) {
+        layer_on(_RAISE);
+      } else {
+        layer_off(_RAISE);
+        if (is_tapped) {
+          tap_code(keycode);
+        }
+      }
+      return false;
+      break;
+
     case QWERTY:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
