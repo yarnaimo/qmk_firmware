@@ -5,4 +5,4 @@
     $-:: send {o}{u}
     $=:: send {e}{i}
     $c:: send {u}{i}
-    $x:: send {u}{u}
+    $l:: send {u}{u}

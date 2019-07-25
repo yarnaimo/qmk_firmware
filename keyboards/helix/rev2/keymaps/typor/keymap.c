@@ -69,11 +69,12 @@ enum custom_keycodes {
 
 #define KC_C_PD CTL_T(KC_PGDN)
 #define KC_C_DN CTL_T(KC_DOWN)
-#define KC_A_5 ALT_T(KC_5)
-#define KC_A_6 ALT_T(KC_6)
+#define KC_A_HM ALT_T(KC_HOME)
+#define KC_A_RT ALT_T(KC_RGHT)
 #define KC_S_SP SFT_T(KC_SPC)
 #define KC_S_BS SFT_T(KC_BSPC)
-#define KC_G_2 GUI_T(KC_2)
+#define KC_G_PU GUI_T(KC_PGUP)
+#define KC_G_UP GUI_T(KC_UP)
 #define KC_L_ZH LT(_LOWER, JP_ZHTG) // act as LOWER when hold, as KC_LANG2(=English) when tapped
 #define KC_R_KN LT(_RAISE, JP_KANA) // act as RAISE when hold, as KC_LANG1(=Japanese) when tapped
 
@@ -125,25 +126,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
      ESC ,SLSH,COMM,JLPR,JRPR,C_CV,            C_Z ,SCLN,JCOL,DOT ,JBSL,DEL ,
   //|----*----*----+----+----+----|           |----+----+----+----*----*----|
-      Q  ,MINS,JEQL, C  , X  ,TAB ,            ENT , F  , Z  , K  , B  , P  ,
+      Q  ,MINS,JEQL, C  , L  ,TAB ,            ENT , F  , Z  , K  , B  , P  ,
   //|----*----*----******----+----|           |----+----******----*----*----|
-      A  , O  , E  , I  , U  ,PGUP,            UP  , N  , T  , S  , R  , D  ,
+      A  , O  , E  , I  , U  ,G_PU,            G_UP, N  , T  , S  , R  , D  ,
   //|----+----+----******----+----+----. ,----+----+----******----+----+----|
-      V  , L  , J  , Y  ,HOME,C_PD,END ,  LEFT,C_DN,RGHT, M  , G  , H  , W  ,
+      X  , J  , V  , Y  ,A_HM,C_PD,END ,  LEFT,C_DN,A_RT, M  , G  , H  , W  ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
-      1  ,G_2 , 3  , 4  ,A_5 ,S_SP,JZHT,  JKAN,BSPC,A_6 , 7  , 8  , 9  , 0  \
+      1  , 2  , 3  , 4  , 5  ,S_SP,JZHT,  JKAN,S_BS, 6  , 7  , 8  , 9  , 0  \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
   ),
 
   [_LOWER] = LAYOUT_kc(
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
-     F1  ,F2  ,F3  ,F4  ,JCIR,PSCR,                ,    ,    ,    ,    ,    ,
+     F1  ,F2  ,F3  ,F4  ,C_X ,C_V ,                ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
      F5  ,F6  ,F7  ,F8  ,JLCB,JRCB,                ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
      F9  ,F10 ,F11 ,F12 ,JLBR,JRBR,                ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
-         ,JPIP,C_C ,C_X ,C_V ,    ,JAT , RESET,    ,    ,    ,    ,    ,    ,
+     PSCR,JPIP,JCIR,    ,    ,    ,JAT , RESET,    ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
      MUTE,    ,    ,    ,    ,    ,NO  ,  MAC ,    ,    ,    ,    ,    ,    \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
@@ -202,6 +203,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   bool is_tapped = ((!record->event.pressed) && (keycode == prev_keycode));
   mem_keycode = keycode;
 
+  static bool cv_canceled = false;
+
   switch (keycode) {
     case KC_AN: if (record->event.pressed) { SEND_STRING("ann"); } break;
     case KC_IN: if (record->event.pressed) { SEND_STRING("inn"); } break;
@@ -209,11 +212,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_EN: if (record->event.pressed) { SEND_STRING("enn"); } break;
     case KC_ON: if (record->event.pressed) { SEND_STRING("onn"); } break;
 
-    case KC_ATT: if (record->event.pressed) { SEND_STRING("altu"); } break;
-    case KC_ITT: if (record->event.pressed) { SEND_STRING("iltu"); } break;
-    case KC_UTT: if (record->event.pressed) { SEND_STRING("ultu"); } break;
-    case KC_ETT: if (record->event.pressed) { SEND_STRING("eltu"); } break;
-    case KC_OTT: if (record->event.pressed) { SEND_STRING("oltu"); } break;
+    case KC_ATT: if (record->event.pressed) { SEND_STRING("axtu"); } break;
+    case KC_ITT: if (record->event.pressed) { SEND_STRING("ixtu"); } break;
+    case KC_UTT: if (record->event.pressed) { SEND_STRING("uxtu"); } break;
+    case KC_ETT: if (record->event.pressed) { SEND_STRING("extu"); } break;
+    case KC_OTT: if (record->event.pressed) { SEND_STRING("oxtu"); } break;
 
     case KC_AH: if (record->event.pressed) { SEND_STRING("a`"); } break;
     case KC_IH: if (record->event.pressed) { SEND_STRING("i`"); } break;
@@ -223,14 +226,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_C_CV:
       if (record->event.pressed) {
+        cv_canceled = false;
         tap_code16(KC_C_C);
       } else {
-        tap_code16(KC_C_V);
+        if (!cv_canceled) {
+          tap_code16(KC_C_V);
+        } else {
+          cv_canceled = false;
+        }
       }
       break;
 
     case KC_JZHT:
       if (record->event.pressed) {
+        cv_canceled = true;
         layer_on(_LOWER);
       } else {
         layer_off(_LOWER);
