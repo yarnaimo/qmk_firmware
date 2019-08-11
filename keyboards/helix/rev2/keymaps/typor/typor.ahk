@@ -4,5 +4,5 @@
     $q:: send {a}{i}
     $-:: send {o}{u}
     $=:: send {e}{i}
-    $c:: send {u}{i}
-    $l:: send {u}{u}
+    $c:: send {u}{u}
+    $l:: send {u}{i}
