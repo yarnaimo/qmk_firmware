@@ -2,7 +2,7 @@
 
 #If, IME_GET()
     $q:: send {a}{i}
-    $-:: send {o}{u}
-    $=:: send {e}{i}
-    $c:: send {u}{u}
-    $l:: send {u}{i}
+    $x:: send {o}{u}
+    ; $j:: send {e}{i}
+    ; $c:: send {u}{u}
+    ; $':: send {u}{i}

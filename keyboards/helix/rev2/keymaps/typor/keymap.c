@@ -36,8 +36,8 @@ enum layer_number {
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
+  KC_LOWER,
+  KC_RAISE,
   FUNC,
   ADJUST,
   EISU,
@@ -53,30 +53,22 @@ enum custom_keycodes {
   KC_UTT,
   KC_ETT,
   KC_OTT,
-  KC_AH,
-  KC_IH,
-  KC_UH,
-  KC_EH,
-  KC_OH,
+  KC_YA,
+  // KC_YI,
+  KC_YU,
+  // KC_YE,
+  KC_YO,
 };
 
+
+#define KC_OSS OSM(MOD_LSFT)
+#define KC_OSSM MT(MOD_LSFT, OSM_SFT)
 
 #define KC_ KC_TRNS
 #define KC_RESET RESET
 
 #define KC_OSCT OSM(MOD_LCTL)
 #define KC_OSSF OSM(MOD_LSFT)
-
-#define KC_C_PD CTL_T(KC_PGDN)
-#define KC_C_DN CTL_T(KC_DOWN)
-#define KC_A_HM ALT_T(KC_HOME)
-#define KC_A_RT ALT_T(KC_RGHT)
-#define KC_S_SP SFT_T(KC_SPC)
-#define KC_S_BS SFT_T(KC_BSPC)
-#define KC_G_PU GUI_T(KC_PGUP)
-#define KC_G_UP GUI_T(KC_UP)
-#define KC_L_ZH LT(_LOWER, JP_ZHTG) // act as LOWER when hold, as KC_LANG2(=English) when tapped
-#define KC_R_KN LT(_RAISE, JP_KANA) // act as RAISE when hold, as KC_LANG1(=Japanese) when tapped
 
 #define KC_C_Z LCTL(KC_Z)
 #define KC_C_X LCTL(KC_X)
@@ -87,6 +79,8 @@ enum custom_keycodes {
 #define KC_WIN AG_SWAP
 #define KC_MAC AG_NORM
 
+#define KC_L___ KC_SPC
+#define KC_R___ KC_SPC
 
 #define KC_JZHT JP_ZHTG  // hankaku/zenkaku|kanzi
 // #define KC_JYEN JP_YEN  // yen, |
@@ -119,32 +113,45 @@ enum custom_keycodes {
 #define KC_JRCB JP_RCBR // }
 #define KC_JUND JP_UNDS // _
 
+#define KC_C_HM CTL_T(KC_HOME)
+#define KC_C_SL CTL_T(KC_SLSH)
+#define KC_C_CL CTL_T(KC_JCOL)
+#define KC_A_CM ALT_T(KC_COMM)
+#define KC_A_MN ALT_T(KC_MINS)
+#define KC_A_L ALT_T(KC_L)
+#define KC_S_SP SFT_T(KC_SPC)
+#define KC_S_BS SFT_T(KC_BSPC)
+#define KC_G_PU GUI_T(KC_PGUP)
+#define KC_G_DN GUI_T(KC_DOWN)
+#define KC_L_ZH LT(_LOWER, JP_ZHTG) // act as LOWER when hold, as KC_LANG2(=English) when tapped
+#define KC_R_KN LT(_RAISE, JP_KANA) // act as RAISE when hold, as KC_LANG1(=Japanese) when tapped
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
-     ESC ,SLSH,COMM,JLPR,JRPR,C_CV,            C_Z ,SCLN,JCOL,DOT ,JBSL,DEL ,
-  //|----*----*----+----+----+----|           |----+----+----+----*----*----|
-      Q  ,MINS,JEQL, C  , L  ,TAB ,            ENT , F  , Z  , K  , B  , P  ,
-  //|----*----*----******----+----|           |----+----******----*----*----|
-      A  , O  , E  , I  , U  ,G_PU,            G_UP, N  , T  , S  , R  , D  ,
-  //|----+----+----******----+----+----. ,----+----+----******----+----+----|
-      X  , J  , V  , Y  ,A_HM,C_PD,END ,  LEFT,C_DN,A_RT, M  , G  , H  , W  ,
+     ESC , 1  , 2  , 3  , 4  , 5  ,             6  , 7  , 8  , 9  , 0  ,DEL ,
+  //|----+----+----+----+----+----|           |----+----+----+----+----+----|
+     TAB ,COMM,DOT , J  , C  ,JQUO,             F  , Z  , K  , B  , P  ,JBSL,
+  //|----+----+----+----+****+----|           |----+****+----+----+----+----|
+     A_MN, A  , O  , E  , I  , U  ,             N  , T  , S  , R  , D  ,ENT ,
+  //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
+     C_CL, Q  , X  , Y  , V  ,JLPR,C_C ,  C_Z , W  , M  , G  , H  , L  ,OSS ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
-      1  , 2  , 3  , 4  , 5  ,S_SP,JZHT,  JKAN,S_BS, 6  , 7  , 8  , 9  , 0  \
+     C_HM,G_PU,PGDN,END ,SLSH,OSS ,LOWER,RAISE,S_BS,SCLN,LEFT,UP  ,G_DN,RGHT\
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
   ),
 
   [_LOWER] = LAYOUT_kc(
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
-     F1  ,F2  ,F3  ,F4  ,C_X ,C_V ,                ,    ,    ,    ,    ,    ,
+     F1  ,F2  ,F3  ,F4  ,    ,    ,                ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-     F5  ,F6  ,F7  ,F8  ,JLCB,JRCB,                ,    ,    ,    ,    ,    ,
+     F5  ,F6  ,F7  ,F8  ,    ,JLCB,            JRCB,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-     F9  ,F10 ,F11 ,F12 ,JLBR,JRBR,                ,    ,    ,    ,    ,    ,
+     F9  ,F10 ,F11 ,F12 ,    ,JLBR,            JRBR,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
-     PSCR,JPIP,JCIR,    ,    ,    ,JAT , RESET,    ,    ,    ,    ,    ,    ,
+     PSCR,JPIP,JCIR,JAT ,    ,C_X ,C_V , RESET,    ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
      MUTE,    ,    ,    ,    ,    ,NO  ,  MAC ,    ,    ,    ,    ,    ,    \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
@@ -154,11 +161,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.           ,----+----+----+----+----+----.
          ,    ,    ,    ,    ,    ,            INS ,NLCK,PSLS,PAST,PMNS,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-     AN  ,ON  ,EN  ,IN  ,UN  ,    ,            JGRV,P7  ,P8  ,P9  ,PPLS,    ,
+         ,    ,    ,    ,    ,    ,            JGRV,P7  ,P8  ,P9  ,PPLS,    ,
   //|----+----+----+----+----+----|           |----+----+----+----+----+----|
-     ATT ,OTT ,ETT ,ITT ,UTT ,    ,            JTIL,P4  ,P5  ,P6  ,PPLS,    ,
+         ,ATT ,OTT ,ETT ,ITT ,UTT ,            JTIL,P4  ,P5  ,P6  ,PPLS,    ,
   //|----+----+----+----+----+----+----. ,----+----+----+----+----+----+----|
-     AH  ,OH  ,EH  ,IH  ,UH  ,    ,    ,  PAUS,P0  ,P1  ,P2  ,P3  ,PENT,    ,
+         ,YA  ,YO  ,    ,    ,YU  ,    ,  PAUS,P0  ,P1  ,P2  ,P3  ,PENT,    ,
   //|----+----+----+----+----+----+----| |----+----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,WIN ,  NO  ,    ,P0  ,    ,PDOT,PENT,    \
   //`----+----+----+----+----+----+----/ \----+----+----+----+----+----+----'
@@ -203,7 +210,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   bool is_tapped = ((!record->event.pressed) && (keycode == prev_keycode));
   mem_keycode = keycode;
 
-  static bool cv_canceled = false;
+  // static bool cv_canceled = false;
 
   switch (keycode) {
     case KC_AN: if (record->event.pressed) { SEND_STRING("ann"); } break;
@@ -212,50 +219,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_EN: if (record->event.pressed) { SEND_STRING("enn"); } break;
     case KC_ON: if (record->event.pressed) { SEND_STRING("onn"); } break;
 
-    case KC_ATT: if (record->event.pressed) { SEND_STRING("axtu"); } break;
-    case KC_ITT: if (record->event.pressed) { SEND_STRING("ixtu"); } break;
-    case KC_UTT: if (record->event.pressed) { SEND_STRING("uxtu"); } break;
-    case KC_ETT: if (record->event.pressed) { SEND_STRING("extu"); } break;
-    case KC_OTT: if (record->event.pressed) { SEND_STRING("oxtu"); } break;
+    case KC_ATT: if (record->event.pressed) { SEND_STRING("altu"); } break;
+    case KC_ITT: if (record->event.pressed) { SEND_STRING("iltu"); } break;
+    case KC_UTT: if (record->event.pressed) { SEND_STRING("ultu"); } break;
+    case KC_ETT: if (record->event.pressed) { SEND_STRING("eltu"); } break;
+    case KC_OTT: if (record->event.pressed) { SEND_STRING("oltu"); } break;
 
-    case KC_AH: if (record->event.pressed) { SEND_STRING("a`"); } break;
-    case KC_IH: if (record->event.pressed) { SEND_STRING("i`"); } break;
-    case KC_UH: if (record->event.pressed) { SEND_STRING("u`"); } break;
-    case KC_EH: if (record->event.pressed) { SEND_STRING("e`"); } break;
-    case KC_OH: if (record->event.pressed) { SEND_STRING("o`"); } break;
+    case KC_YA: if (record->event.pressed) { SEND_STRING("ya"); } break;
+    // case KC_YI: if (record->event.pressed) { SEND_STRING("yi"); } break;
+    case KC_YU: if (record->event.pressed) { SEND_STRING("yu"); } break;
+    // case KC_YE: if (record->event.pressed) { SEND_STRING("ye"); } break;
+    case KC_YO: if (record->event.pressed) { SEND_STRING("yo"); } break;
 
-    case KC_C_CV:
+    // case KC_C_CV:
+    //   if (record->event.pressed) {
+    //     cv_canceled = false;
+    //     tap_code16(KC_C_C);
+    //   } else {
+    //     if (!cv_canceled) {
+    //       tap_code16(KC_C_V);
+    //     } else {
+    //       cv_canceled = false;
+    //     }
+    //   }
+    //   break;
+
+    case KC_LOWER:
       if (record->event.pressed) {
-        cv_canceled = false;
-        tap_code16(KC_C_C);
-      } else {
-        if (!cv_canceled) {
-          tap_code16(KC_C_V);
-        } else {
-          cv_canceled = false;
-        }
-      }
-      break;
-
-    case KC_JZHT:
-      if (record->event.pressed) {
-        cv_canceled = true;
+        // cv_canceled = true;
         layer_on(_LOWER);
       } else {
         layer_off(_LOWER);
         if (is_tapped) {
-          tap_code(keycode);
+          tap_code(KC_SPC);
         }
       }
       return false;
       break;
-    case KC_JKAN:
+    case KC_RAISE:
       if (record->event.pressed) {
         layer_on(_RAISE);
       } else {
         layer_off(_RAISE);
         if (is_tapped) {
-          tap_code(keycode);
+          tap_code(JP_ZHTG);
         }
       }
       return false;
@@ -270,52 +277,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case LOWER:
-      if (record->event.pressed) {
-          //not sure how to have keyboard check mode and set it to a variable, so my work around
-          //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-          #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(RGBLIGHT_MODE_SNAKE + 1);
-          #endif
-        }
-        layer_on(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);   // revert RGB to initial mode prior to RGB mode change
-        #endif
-        TOG_STATUS = false;
-        layer_off(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        //not sure how to have keyboard check mode and set it to a variable, so my work around
-        //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-          #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(RGBLIGHT_MODE_SNAKE);
-          #endif
-        }
-        layer_on(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);  // revert RGB to initial mode prior to RGB mode change
-        #endif
-        layer_off(_RAISE);
-        TOG_STATUS = false;
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
+    // case LOWER:
+    //   if (record->event.pressed) {
+    //       //not sure how to have keyboard check mode and set it to a variable, so my work around
+    //       //uses another variable that would be set to true after the first time a reactive key is pressed.
+    //     if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
+    //     } else {
+    //       TOG_STATUS = !TOG_STATUS;
+    //       #ifdef RGBLIGHT_ENABLE
+    //         //rgblight_mode(RGBLIGHT_MODE_SNAKE + 1);
+    //       #endif
+    //     }
+    //     layer_on(_LOWER);
+    //     update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+    //   } else {
+    //     #ifdef RGBLIGHT_ENABLE
+    //       //rgblight_mode(RGB_current_mode);   // revert RGB to initial mode prior to RGB mode change
+    //     #endif
+    //     TOG_STATUS = false;
+    //     layer_off(_LOWER);
+    //     update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+    //   }
+    //   return false;
+    //   break;
+    // case RAISE:
+    //   if (record->event.pressed) {
+    //     //not sure how to have keyboard check mode and set it to a variable, so my work around
+    //     //uses another variable that would be set to true after the first time a reactive key is pressed.
+    //     if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
+    //     } else {
+    //       TOG_STATUS = !TOG_STATUS;
+    //       #ifdef RGBLIGHT_ENABLE
+    //         //rgblight_mode(RGBLIGHT_MODE_SNAKE);
+    //       #endif
+    //     }
+    //     layer_on(_RAISE);
+    //     update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+    //   } else {
+    //     #ifdef RGBLIGHT_ENABLE
+    //       //rgblight_mode(RGB_current_mode);  // revert RGB to initial mode prior to RGB mode change
+    //     #endif
+    //     layer_off(_RAISE);
+    //     TOG_STATUS = false;
+    //     update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+    //   }
+    //   return false;
+    //   break;
     case FUNC:
       if (record->event.pressed) {
           layer_on(_FUNC);
