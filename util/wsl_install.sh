@@ -29,7 +29,7 @@ download_dir=wsl_downloaded
 
 source "$dir/win_shared_install.sh"
 
-pip3 install -r ${util_dir}/../requirements.txt
+pip3 install -r ../${util_dir}/../requirements.txt
 
 pushd "$download_dir"
 while true; do
@@ -38,7 +38,7 @@ while true; do
     echo "Please install it to the default location!"
     read -p "Do you want to install it now? (Y/N) " res
     case $res in
-        [Yy]* ) cmd.exe /c FlipInstaller.exe; break;;
+        [Yy]* ) /mnt/c/WINDOWS/system32/cmd.exe /c FlipInstaller.exe; break;;
         [Nn]* ) break;;
         * ) echo "Invalid answer";;
     esac

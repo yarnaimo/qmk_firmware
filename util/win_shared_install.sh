@@ -38,7 +38,7 @@ function install_drivers {
     pushd "$download_dir"
     cp -f "$dir/drivers.txt" .
     echo 
-    cmd.exe //c "qmk_driver_installer.exe $1 $2 drivers.txt"
+    /mnt/c/WINDOWS/system32/cmd.exe //c "qmk_driver_installer.exe $1 $2 drivers.txt"
     popd > /dev/null
 }
 
