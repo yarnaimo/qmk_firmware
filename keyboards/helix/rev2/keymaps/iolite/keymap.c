@@ -17,7 +17,6 @@
 #include "keymap_jp.h"
 #include <sendstring_jis.h>
 #include "iolite.h"
-#include "str.h"
 #include "combo.h"
 
 // #ifdef SSD1306OLED
@@ -58,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
     KC_TAB,  IL_Q,    IL_W,    IL_E,    IL_R,    IL_T,                      IL_Y,    IL_U,    IL_I,    IL_O,    IL_P,    KC_BSPC, \
     KC_LALT, IL_A,    IL_S,    IL_D,    IL_F,    IL_G,                      IL_H,    IL_J,    IL_K,    IL_L,    IL_SCLN, KC_ENT,  \
-    KC_LSFT, IL_Z,    IL_X,    IL_C,    IL_V,    IL_B,    C_C,     C_Z,     IL_N,    IL_M,    IL_COMM, IL_DOT,  IL_SLSH, KC_MINS, \
-    KC_LCTL, KC_LGUI, IL_PGDN, IL_END,  IL_TMB1, IL_TMB2, IL_TMB3, IL_TMB4, IL_TMB5, IL_TMB6, IL_LEFT, IL_UP,   IL_DOWN, IL_RGHT  \
+    KC_LSFT, IL_Z,    IL_X,    IL_C,    IL_V,    IL_B,    C_C,     C_Z,     IL_N,    IL_M,    IL_COMM, IL_DOT,  KC_UP,   KC_MINS, \
+    KC_LCTL, KC_LGUI, _______, KC_CAPS, JP_MHEN, KC_COMM, ZH_RAIS, SP_RAIS, KC_DOT,  IL_SLSH, JP_HENK, KC_LEFT, KC_DOWN, KC_RGHT  \
   ),
 
   [_RAISE] = LAYOUT(
@@ -206,33 +205,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint16_t prev_keycode = mem_keycode;
   bool is_tapped = ((!record->event.pressed) && (keycode == prev_keycode));
   mem_keycode = keycode;
-//   if (record->event.pressed) {
-// #ifdef SSD1306OLED
-//     // set_keylog(keycode, record);
-// #endif
-//     // set_timelog();
-//   }
 
   switch (keycode) {
-    // case UNDGL:
-    //   if (record->event.pressed) {
-    //     underglow = !underglow;
-    //   }
-    //   // update_led();
-    //   return false;
-    //   break;
-    case IL_TMB3:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-      } else {
-        layer_off(_RAISE);
-        if (is_tapped) {
-          tap_code(KC_SPC);
-        }
-      }
-      return false;
-      break;
-    case IL_TMB4:
+    case ZH_RAIS:
       if (record->event.pressed) {
         layer_on(_RAISE);
       } else {
@@ -243,13 +218,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case SP_RAIS:
+      if (record->event.pressed) {
+        layer_on(_RAISE);
+      } else {
+        layer_off(_RAISE);
+        if (is_tapped) {
+          tap_code(KC_SPC);
+        }
+      }
+      return false;
+      break;
 
     case IL_W:
+      if (record->event.pressed) {
+        SEND_STRING("ei");
+      }
+      return false;
+      break;
+
     case IL_R:
+      if (record->event.pressed) {
+        SEND_STRING("ai");
+      }
+      return false;
+      break;
+
     case IL_X:
+      if (record->event.pressed) {
+        SEND_STRING("ou");
+      }
+      return false;
+      break;
+
     case IL_V:
       if (record->event.pressed) {
-        process_strmap(keycode);
+        SEND_STRING("uu");
       }
       return false;
       break;

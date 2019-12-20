@@ -1,14 +1,14 @@
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
-#define COMBO_COUNT 16
-#define COMBO_TERM 120
+#define COMBO_COUNT 4
+#define COMBO_TERM 70
 
 #define SWAP_SCLN
 
 #undef TAPPING_FORCE_HOLD
 #undef TAPPING_TERM
-#define TAPPING_TERM 120
+#define TAPPING_TERM 70
 // #define IGNORE_MOD_TAP_INTERRUPT
 
 // #define PERMISSIVE_HOLD

@@ -9,17 +9,19 @@ typedef enum iolite_keycodes {
   IL_X,
   IL_V,
 
+  SP_RAIS = SAFE_RANGE,
+  ZH_RAIS,
   // IL_HOME,
   // IL_PGUP,
-  IL_PGDN = SAFE_RANGE,
-  IL_END,
-  IL_TMB1,
+  // IL_PGDN = SAFE_RANGE,
+  // IL_END,
+  // IL_TMB1,
   // IL_TMB2,
-  IL_TMB3,
+  // IL_TMB3,
 
-  IL_TMB4,
+  // IL_TMB4,
   // IL_TMB5,
-  IL_TMB6,
+  // IL_TMB6,
   // IL_LEFT,
   // IL_UP,
   // IL_DOWN,
@@ -59,8 +61,6 @@ typedef enum iolite_keycodes {
 #define IL_DOT  KC_R
 #define IL_SLSH KC_W
 // #define IL_SHFT KC_SPC
-#define IL_TMB2 KC_COMM
-#define IL_TMB5 KC_DOT
 #define IL_LEFT KC_LEFT
 #define IL_UP   KC_UP
 #define IL_DOWN KC_DOWN

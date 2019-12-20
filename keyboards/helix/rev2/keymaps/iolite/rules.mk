@@ -39,5 +39,4 @@ include $(strip $(KEYBOARD_LOCAL_FEATURES_MK))
 
 # USER_NAME := edvorakjp
 # SRC += oled.c
-SRC += str.c
 SRC += combo.c
