@@ -28,8 +28,8 @@ typedef enum iolite_keycodes {
 #define IL_Q    KC_X
 #define IL_W    KC_E
 #define IL_E    KC_A
-#define IL_R    JP_MHEN
-#define IL_T    KC_J
+#define IL_R    KC_J
+#define IL_T    JP_EQL
 #define IL_Y    KC_F
 #define IL_U    KC_G
 #define IL_I    KC_K
@@ -39,24 +39,27 @@ typedef enum iolite_keycodes {
 #define IL_S    KC_O
 #define IL_D    KC_U
 #define IL_F    KC_I
-#define IL_G    KC_L
+#define IL_G    KC_MINS
 #define IL_H    KC_D
 #define IL_J    KC_T
 #define IL_K    KC_S
 #define IL_L    KC_N
 #define IL_SCLN KC_Z
 #define IL_Z    KC_Q
-#define IL_X    JP_EQL
+#define IL_X    JP_COLN
 #define IL_C    KC_SLSH
-#define IL_V    KC_MINS
+#define IL_V    KC_W
 #define IL_B    KC_V
 #define IL_N    KC_Y
 #define IL_M    KC_M
 #define IL_COMM KC_P
 #define IL_DOT  KC_R
-#define IL_SLSH KC_W
+#define IL_SLSH KC_L
 // #define IL_SHFT KC_SPC
 #define IL_LEFT KC_LEFT
 #define IL_UP   KC_UP
 #define IL_DOWN KC_DOWN
 #define IL_RGHT KC_RGHT
+
+#define IL_L2   KC_COMM
+#define IL_R2   KC_DOT
