@@ -4,10 +4,10 @@
 #include "combo.h"
 
 const PROGMEM il_combomap combomap[] = {
-  [C_HOME] = {.keys = {IL_LEFT, JP_HENK, 0}, .kana = SS_TAP(X_HOME)},
-  [C_PGUP] = {.keys = {IL_UP, KC_R, 0}, .kana = SS_TAP(X_PGUP)},
-  [C_PGDN] = {.keys = {IL_DOWN, IL_LEFT, 0}, .kana = SS_TAP(X_PGDN)},
-  [C_END]  = {.keys = {IL_RGHT, IL_DOWN, 0}, .kana = SS_TAP(X_END)},
+  [C_HOME] = {.keys = {KC_LEFT, JP_HENK, 0}, .kana = SS_TAP(X_HOME)},
+  [C_PGUP] = {.keys = {KC_UP, KC_L, 0}, .kana = SS_TAP(X_PGUP)},
+  [C_PGDN] = {.keys = {KC_DOWN, KC_LEFT, 0}, .kana = SS_TAP(X_PGDN)},
+  [C_END]  = {.keys = {KC_RGHT, KC_DOWN, 0}, .kana = SS_TAP(X_END)},
 };
 
 void process_combomap(uint8_t combo_index) {

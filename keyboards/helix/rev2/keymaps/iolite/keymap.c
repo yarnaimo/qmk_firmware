@@ -31,7 +31,10 @@
 // #endif
 
 enum keymap_layers {
-  _IOLITE, // 薙刀式入力レイヤー
+  _IOLITE,
+  _SYMBOL_L,
+  _SYMBOL_R,
+  _SYMBOL_LR,
   _RAISE,
 };
 
@@ -55,23 +58,55 @@ enum keymap_layers {
 #define CS_I LCTL(LSFT(KC_I))
 #define MOZH_MH LT(JP_MHEN)
 #define S_COLN SFT_T(JP_COLN)
+#define S_CAPS SFT_T(KC_CAPS)
 #define A_ZHTG ALT_T(JP_ZHTG)
+
+#define IL_COMM SFT_T(KC_COMM)
+#define IL_DOT SFT_T(KC_DOT)
+
+#define KMINS_L LT(_SYMBOL_L, KC_MINS)
+#define JEQL_R LT(_SYMBOL_R, JP_EQL)
+#define JCOLN_LR LT(_SYMBOL_LR, JP_COLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_IOLITE] = LAYOUT(
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
-    KC_TAB,  IL_Q,    IL_W,    IL_E,    IL_R,    IL_T,                      IL_Y,    IL_U,    IL_I,    IL_O,    IL_P,    KC_BSPC, \
-    A_ZHTG,  IL_A,    IL_S,    IL_D,    IL_F,    IL_G,                      IL_H,    IL_J,    IL_K,    IL_L,    IL_SCLN, KC_ENT,  \
-    KC_LSFT, IL_Z,    IL_X,    IL_C,    IL_V,    IL_B,    C_C,     C_Z,     IL_N,    IL_M,    IL_COMM, IL_DOT,  KC_UP,   JP_SCLN,  \
-    KC_LCTL, KC_LGUI, _______, KC_CAPS, JP_MHEN, IL_L2,   SP_RAIS, SP_RAIS, IL_R2,   IL_SLSH, JP_HENK, KC_LEFT, KC_DOWN, KC_RGHT  \
+    KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL , \
+    KC_TAB , KC_J   , KC_E   , KC_A   , KC_Y   , JP_EQL ,                   KC_F   , KC_G   , KC_K   , KC_R   , KC_P   , KC_BSPC, \
+    A_ZHTG , KC_C   , KC_O   , KC_U   , KC_I   , KC_MINS,                   KC_H   , KC_T   , KC_S   , KC_N   , KC_D   , KC_ENT , \
+    KC_LSFT, JP_COLN, KC_Q   , KC_X   , KC_W   , KC_V   , C_C    , C_Z    , KC_B   , KC_M   , KC_Z   , KC_L   , KC_UP  , JP_SCLN,  \
+    KC_LCTL, KC_LGUI, S_CAPS , KC_CAPS, JP_MHEN, KC_COMM, SP_RAIS, SP_RAIS, KC_DOT , KC_SLSH, JP_HENK, KC_LEFT, KC_DOWN, KC_RGHT  \
+  ),
+
+  [_SYMBOL_L] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, JP_AT  , JP_ASTR, JP_CIRC, _______, \
+    _______, _______, _______, _______, _______, _______,                   JP_GRV , JP_QUOT, JP_LBRC, JP_DQT , JP_PLUS, _______, \
+    _______, _______, _______, _______, _______, _______,                   JP_SLSH, JP_LPRN, JP_LT  , JP_LCBR, JP_QUES, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, JP_TILD, JP_UNDS, JP_PIPE, JP_BSLS, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  ),
+
+  [_SYMBOL_R] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                   _______, _______, JP_RBRC, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                   _______, JP_RPRN, JP_GT  , JP_RCBR, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  ),
+
+  [_SYMBOL_LR] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                   _______, _______, LR_BRC , _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                   _______, LR_PRN , LR_T   , LR_CBR , _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
   ),
 
   [_RAISE] = LAYOUT(
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_PSCR, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, \
-    _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                    KC_MUTE, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______, \
-    _______, KC_F11,  KC_F12,  JP_BSLS, CS_I,    C_SLSH,                    KC_PAUS, KC_P4,   KC_P5,   KC_P6,   KC_PENT, _______, \
-    _______, JP_CIRC, JP_AT,   JP_LBRC, JP_RBRC, C_X,     C_V,     CS_Z,    KC_INS,  KC_P1,   KC_P2,   KC_P3,   KC_PDOT, _______, \
-    _______, _______, _______, RESET,   AG_SWAP, AG_NORM, _______, _______, KC_P0,   KC_P0,   _______, _______, _______, _______  \
+    _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                   KC_PSCR, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, \
+    _______, KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 ,                   KC_MUTE, KC_P7  , KC_P8  , KC_P9  , KC_PPLS, _______, \
+    _______, KC_F11 , KC_F12 , JP_BSLS, CS_I   , C_SLSH ,                   KC_PAUS, KC_P4  , KC_P5  , KC_P6  , KC_PENT, _______, \
+    _______, JP_CIRC, JP_AT  , JP_LBRC, JP_RBRC, C_X    , C_V    , CS_Z   , KC_INS , KC_P1  , KC_P2  , KC_P3  , KC_PDOT, _______, \
+    _______, _______, JP_PIPE, RESET  , AG_SWAP, AG_NORM, _______, _______, KC_P0  , KC_P0  , _______, _______, _______, _______  \
   ),
 };
 
@@ -91,114 +126,6 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   }
 }
 
-// void matrix_init_user(void) {
-//   // 薙刀式
-//   set_iolite(_IOLITE);
-//   #ifdef IOLITE_EDIT_MAC
-//   set_unicode_input_mode(UC_OSX);
-//   #endif
-//   #ifdef IOLITE_EDIT_WIN
-//   set_unicode_input_mode(UC_WINC);
-//   #endif
-//   // 薙刀式
-
-//   #ifdef RGBLIGHT_ENABLE
-//     RGB_current_mode = rgblight_config.mode;
-//   #endif
-//   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-//   #ifdef SSD1306OLED
-//       iota_gfx_init(!has_usb());   // turns on the display
-//   #endif
-// }
-
-// //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
-// #ifdef SSD1306OLED
-
-// // When add source files to SRC in rules.mk, you can use functions.
-// const char *read_layer_state(void);
-// const char *read_logo(void);
-// void set_keylog(uint16_t keycode, keyrecord_t *record);
-// const char *read_keylog(void);
-// const char *read_keylogs(void);
-
-// // const char *read_mode_icon(bool swap);
-// // const char *read_host_led_state(void);
-// // void set_timelog(void);
-// // const char *read_timelog(void);
-
-// void matrix_scan_user(void) {
-//    iota_gfx_task();
-// }
-
-// void matrix_render_user(struct CharacterMatrix *matrix) {
-//   if (is_master) {
-//     // If you want to change the display of OLED, you need to change here
-//     matrix_write_ln(matrix, read_layer_state());
-//     matrix_write_ln(matrix, read_keylog());
-//     matrix_write_ln(matrix, read_keylogs());
-//     //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
-//     //matrix_write_ln(matrix, read_host_led_state());
-//     //matrix_write_ln(matrix, read_timelog());
-//   } else {
-//     matrix_write(matrix, read_logo());
-//   }
-// }
-
-// void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
-//   if (memcmp(dest->display, source->display, sizeof(dest->display))) {
-//     memcpy(dest->display, source->display, sizeof(dest->display));
-//     dest->dirty = true;
-//   }
-// }
-
-// void iota_gfx_task_user(void) {
-//   struct CharacterMatrix matrix;
-//   matrix_clear(&matrix);
-//   matrix_render_user(&matrix);
-//   matrix_update(&display, &matrix);
-// }
-// #endif//SSD1306OLED
-
-// static bool underglow = false;
-
-// void update_led() {
-//   if (layer_state_is(_LOWER) && !isLeftHand) {
-//     // rgblight_setrgb_at(0, 0, 200, 7);
-//     rgblight_sethsv_at(200, 100, 255, 15);
-//     rgblight_sethsv_at(200, 100, 255, 16);
-//     rgblight_sethsv_at(200, 100, 255, 17);
-//     rgblight_sethsv_at(200, 100, 255, 18);
-//     rgblight_sethsv_at(200, 100, 255, 19);
-//     rgblight_sethsv_at(200, 100, 255, 20);
-//     rgblight_sethsv_at(200, 100, 255, 21);
-//     rgblight_sethsv_at(200, 100, 255, 22);
-//     rgblight_sethsv_at(200, 100, 255, 23);
-//   }
-//   if (layer_state_is(_RAISE) && !isLeftHand) {
-//     rgblight_sethsv_at(200, 100, 255, 11);
-//     rgblight_sethsv_at(200, 100, 255, 16);
-//     rgblight_sethsv_at(200, 100, 255, 17);
-//     rgblight_sethsv_at(200, 100, 255, 19);
-//   }
-//   if (!layer_state_is(_LOWER) && !layer_state_is(_RAISE)) {
-//     rgblight_sethsv_range(0, 0, 0, 6, 27);
-//   }
-//   if (iolite_state()) {
-//     rgblight_sethsv_at(200, 200, 255, 6);
-//     rgblight_sethsv_at(200, 200, 255, 13);
-//     rgblight_sethsv_at(200, 200, 255, 14);
-//   } else {
-//     rgblight_sethsv_at(0, 0, 0, 6);
-//     rgblight_sethsv_at(0, 0, 0, 13);
-//     rgblight_sethsv_at(0, 0, 0, 14);
-//   }
-//   if (underglow) {
-//     rgblight_sethsv_range(200, 200, 255, 0, 6);
-//   } else {
-//     rgblight_sethsv_range(200, 200, 0, 0, 6);
-//   }
-// }
-
 void process_combo_event(uint8_t combo_index, bool pressed) {
   if (!pressed) {
     process_combomap(combo_index);
@@ -211,29 +138,81 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   bool is_tapped = ((!record->event.pressed) && (keycode == prev_keycode));
   mem_keycode = keycode;
 
+  void st(uint16_t kc) {
+    if (record->event.pressed) {
+      SEND_STRING(SS_DOWN(X_LSHIFT));
+    } else {
+      SEND_STRING(SS_UP(X_LSHIFT));
+      if (is_tapped) {
+        tap_code(kc);
+      }
+    }
+  }
+
+  void lt(uint16_t kc, uint8_t layer) {
+    if (record->event.pressed) {
+      layer_on(layer);
+    } else {
+      layer_off(layer);
+      if (is_tapped) {
+        tap_code(kc);
+      }
+    }
+  }
+
   switch (keycode) {
-    case ZH_RAIS:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-      } else {
-        layer_off(_RAISE);
-        if (is_tapped) {
-          tap_code(JP_ZHTG);
-        }
-      }
+    // case ZH_RAIS:
+    //   lt(JP_ZHTG, _RAISE);
+    //   return false;
+    //   break;
+
+    case KC_COMM:
+      st(KC_COMM);
       return false;
-      break;
+
+    case KC_DOT:
+      st(KC_DOT);
+      return false;
+
+    case KC_MINS:
+      lt(KC_MINS, _SYMBOL_L);
+      return false;
+
+    case JP_EQL:
+      lt(JP_EQL, _SYMBOL_R);
+      return false;
+
+    case JP_COLN:
+      lt(JP_COLN, _SYMBOL_LR);
+      return false;
+
     case SP_RAIS:
+      lt(KC_SPC, _RAISE);
+      return false;
+
+    case LR_BRC:
       if (record->event.pressed) {
-        layer_on(_RAISE);
-      } else {
-        layer_off(_RAISE);
-        if (is_tapped) {
-          tap_code(KC_SPC);
-        }
+        SEND_STRING("[]" SS_TAP(X_LEFT));
       }
       return false;
-      break;
+
+    case LR_PRN:
+      if (record->event.pressed) {
+        SEND_STRING("()" SS_TAP(X_LEFT));
+      }
+      return false;
+
+    case LR_T:
+      if (record->event.pressed) {
+        SEND_STRING("<>" SS_TAP(X_LEFT));
+      }
+      return false;
+
+    case LR_CBR:
+      if (record->event.pressed) {
+        SEND_STRING("{}" SS_TAP(X_LEFT));
+      }
+      return false;
 
     // case QWERTY:
     //   if (record->event.pressed) {
