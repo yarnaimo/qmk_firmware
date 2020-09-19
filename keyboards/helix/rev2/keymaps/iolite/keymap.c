@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYMBOL_LR] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______,                   _______, _______, LR_BRC , _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______,                   LR_GRV , LR_QUOT, LR_BRC , LR_DQT , _______, _______, \
     _______, _______, _______, _______, _______, _______,                   _______, LR_PRN , LR_T   , LR_CBR , _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
@@ -211,6 +211,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case LR_CBR:
       if (record->event.pressed) {
         SEND_STRING("{}" SS_TAP(X_LEFT));
+      }
+      return false;
+
+    case LR_GRV:
+      if (record->event.pressed) {
+        SEND_STRING("``" SS_TAP(X_LEFT));
+      }
+      return false;
+
+    case LR_QUOT:
+      if (record->event.pressed) {
+        SEND_STRING("''" SS_TAP(X_LEFT));
+      }
+      return false;
+
+    case LR_DQT:
+      if (record->event.pressed) {
+        SEND_STRING("\"\"" SS_TAP(X_LEFT));
       }
       return false;
 

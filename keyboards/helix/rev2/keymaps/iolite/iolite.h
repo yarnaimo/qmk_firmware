@@ -11,6 +11,9 @@ typedef enum iolite_keycodes {
   LR_PRN,
   LR_T,
   LR_CBR,
+  LR_GRV,
+  LR_QUOT,
+  LR_DQT,
 } ILKCS;
 
 // #define IL_SAFE_RANGE SAFE_RANGE+63
