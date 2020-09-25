@@ -140,9 +140,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   void st(uint16_t kc) {
     if (record->event.pressed) {
-      SEND_STRING(SS_DOWN(X_LSHIFT));
+      register_code(KC_LSFT);
     } else {
-      SEND_STRING(SS_UP(X_LSHIFT));
+      unregister_code(KC_LSFT);
       if (is_tapped) {
         tap_code(kc);
       }
