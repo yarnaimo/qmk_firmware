@@ -180,8 +180,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       lt(JP_ZHTG, _SYMBOL_L);
       return false;
 
-    case JP_HENK:
-      lt(JP_HENK, _SYMBOL_R);
+    case JP_KANA:
+      lt(JP_KANA, _SYMBOL_R);
       return false;
 
     case JP_COLN:
