@@ -73,9 +73,9 @@ enum keymap_layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_IOLITE] = LAYOUT(
     KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL , \
-    KC_TAB , KC_J   , KC_E   , KC_A   , KC_Y   , KC_H   ,                   KC_F   , KC_G   , KC_K   , KC_R   , KC_P   , KC_BSPC, \
+    KC_TAB , KC_J   , KC_E   , KC_A   , KC_Y   , KC_B   ,                   KC_F   , KC_G   , KC_K   , KC_R   , KC_P   , KC_BSPC, \
     KC_LALT, KC_C   , KC_O   , KC_U   , KC_I   , JP_ZHTG,                   JP_KANA, KC_T   , KC_S   , KC_N   , KC_D   , KC_ENT , \
-    KC_LSFT, JP_COLN, KC_Q   , KC_X   , KC_W   , KC_V   , C_C    , C_Z    , KC_B   , KC_M   , KC_Z   , KC_L   , KC_MINS, JP_SCLN, \
+    KC_LSFT, JP_COLN, KC_Q   , KC_X   , KC_W   , KC_V   , C_C    , C_Z    , KC_H   , KC_M   , KC_Z   , KC_L   , KC_MINS, JP_SCLN, \
     _______, _______, _______, KC_LGUI, KC_LCTL, KC_COMM, SP_RAIS, SP_RAIS, KC_DOT , KC_SLSH, _______, _______, _______, _______  \
   ),
 
